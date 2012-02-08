@@ -32,7 +32,7 @@ public partial class CartList : System.Web.UI.Page
             row[i].Cells.Add(col[0]);
             row[i].Cells.Add(col[1]);
 
-            col[0].Text = "<b>" + cartItem.ImageUrl.ToString() + "</b>";
+            col[0].Text = "<img src='" + cartItem.ImageUrl.ToString() + "' height='100'/>";
             col[0].HorizontalAlign = HorizontalAlign.Center;
             col[0].BorderWidth = 1;
             col[0].Width = Unit.Percentage(50);
@@ -53,5 +53,7 @@ public partial class CartList : System.Web.UI.Page
             //col[3].Width = Unit.Percentage(10);
             //i++;
         }
+        Response.Write(t);
+        Response.Write("<br>" + cart.A);
     }
 }

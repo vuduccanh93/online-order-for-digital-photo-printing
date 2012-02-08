@@ -47,11 +47,12 @@ public partial class Album : System.Web.UI.Page
         TextBox tb = (TextBox)gvr.Cells[4].FindControl("TextBox1");
         int quantity = Int32.Parse(tb.Text);
         Cart c = new Cart();
+        c.AA();
         Response.Write(url);
         Response.Write(res);
         Response.Write(quantity);
         c.Insert(url, res, quantity, 100);
-        //Response.Redirect("CartList.aspx");
+        Response.Redirect("CartList.aspx");
     }
 
 }

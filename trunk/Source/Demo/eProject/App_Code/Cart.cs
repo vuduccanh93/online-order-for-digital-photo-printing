@@ -5,11 +5,19 @@ using System.Web;
 /// <summary>
 /// Summary description for Cart
 /// </summary>
+[Serializable]
 public class Cart
 {
     private DateTime dateCreated;
     private DateTime lastUpdate;
     private List<CartItem> items;
+    private int a = 0;
+
+    public int A
+    {
+        get { return a; }
+        set { a = value; }
+    }
 
     public List<CartItem> Items
     {
@@ -24,12 +32,12 @@ public class Cart
             this.items = new List<CartItem>();
             this.dateCreated = DateTime.Now;
         }
-        CartItem NewItem = new CartItem();
-        NewItem.ImageUrl = "/eProject/Images/abc/161404_Koala.jpg";
-        NewItem.Res = "3x4";
-        NewItem.Quantity = 4;
-        NewItem.Price = 100;
-        items.Add(NewItem);
+        //CartItem NewItem = new CartItem();
+        //NewItem.ImageUrl = "/eProject/Images/abc/161404_Koala.jpg";
+        //NewItem.Res = "3x4";
+        //NewItem.Quantity = 4;
+        //NewItem.Price = 100;
+        //items.Add(NewItem);
 	}
 
     public void Insert(string imageUrl, string res, int quantity, int price)
@@ -72,11 +80,11 @@ public class Cart
         int index = 0;
         foreach (CartItem item in items)
         {
-            if (item.ImageUrl == imageUrl)
+            if (item.ImageUrl.Equals(imageUrl))
             {
                 return index;
             }
-            index += 1;
+            index++;
         }
         return -1;
     }
@@ -96,5 +104,9 @@ public class Cart
             }
             return totalPrice;
         }
+    }
+
+    public void AA() {
+        this.a += 1000;
     }
 }
