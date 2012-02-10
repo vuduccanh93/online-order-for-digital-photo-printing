@@ -11,34 +11,27 @@ public class Cart
     private DateTime dateCreated;
     private DateTime lastUpdate;
     private List<CartItem> items;
-    private int a = 0;
-
-    public int A
-    {
-        get { return a; }
-        set { a = value; }
-    }
+    
 
     public List<CartItem> Items
     {
         get { return items; }
         set { items = value; }
     }
-
-	public Cart()
-	{
-        if (this.items == null)
-        {
-            this.items = new List<CartItem>();
-            this.dateCreated = DateTime.Now;
-        }
-        //CartItem NewItem = new CartItem();
-        //NewItem.ImageUrl = "/eProject/Images/abc/161404_Koala.jpg";
-        //NewItem.Res = "3x4";
-        //NewItem.Quantity = 4;
-        //NewItem.Price = 100;
-        //items.Add(NewItem);
-	}
+    public static readonly Cart Instance;
+    static Cart()
+    {  
+        // If the cart is not in the session, create one and put it there  
+        // Otherwise, get it from the session  
+        if (HttpContext.Current.Session["ASPNETShoppingCart"] == null) {
+            Instance = new Cart();  
+            Instance.Items = new List<CartItem>();  
+            HttpContext.Current.Session["ASPNETShoppingCart"] = Instance;  
+        } else {
+            Instance = (Cart)HttpContext.Current.Session["ASPNETShoppingCart"];  
+        }  
+    }  
+	protected Cart() { } 
 
     public void Insert(string imageUrl, string res, int quantity, int price)
     {
@@ -106,7 +99,5 @@ public class Cart
         }
     }
 
-    public void AA() {
-        this.a += 1000;
-    }
+    
 }
