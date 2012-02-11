@@ -8,12 +8,9 @@ public partial class CartControl : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-        if (!Page.IsPostBack)
-        {
+                
             ReBindGrid();
-        }
-        
+                
     }
     private void ReBindGrid()
     {
@@ -55,14 +52,17 @@ public partial class CartControl : System.Web.UI.UserControl
                     string imageurl = row.Cells[1].Text;
                     string res = row.Cells[2].Text;
                     // Find the quantity TextBox and retrieve the value
-                    int quantity = int.Parse(((TextBox)row.Cells[3].FindControl("txtQuantity")).Text);
-                    Cart.Instance.SetItemQuantity(imageurl,res,quantity);
+                    int quantity = Int32.Parse(((TextBox)row.Cells[3].FindControl("txtQuantity")).Text);
+                    Cart.Instance.SetItemQuantity(imageurl,res,3);
+                    
                 }
                 catch (FormatException) { }
             }
         }
 
         ReBindGrid();
+        
+        
     }
 
 }

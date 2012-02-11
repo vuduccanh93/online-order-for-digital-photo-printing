@@ -45,7 +45,6 @@ public partial class Album : System.Web.UI.Page
         DropDownList ddl = (DropDownList)gvr.Cells[3].FindControl("DropDownList1");
         string res = ddl.SelectedValue;
         Cart.Instance.AddItem(url, res, 100);
-
         Response.Redirect("UserCart.aspx");
     }
 

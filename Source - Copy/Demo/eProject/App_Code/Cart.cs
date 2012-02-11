@@ -55,14 +55,14 @@ public class Cart
         Items.Remove(removedItem);
     }
 
-    public void SetItemQuantity(string imageUrl, string res,
-                         int quantity)
+    public void SetItemQuantity(string imageUrl, string res, int quantity)
     {
         if (quantity == 0)
         {
             RemoveItem(imageUrl, res);
             return;
         }
+        
         CartItem updatedItem = new CartItem(imageUrl, res);
         foreach (CartItem item in Items)
         {
