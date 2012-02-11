@@ -18,12 +18,15 @@
 <asp:BoundField DataField="Res" DataFormatString="{0:c}" 
                 HeaderText="Res" ReadOnly="True" />
     <asp:TemplateField HeaderText="Quantity"><ItemTemplate>  
-                            <asp:TextBox runat="server" ID="txtQuantity" Columns="5" Text='<%# Eval("Quantity") %>'></asp:TextBox><br />  
+                            <asp:TextBox runat="server" ID="txtQuantity" Columns="5" Text='<%# Eval("Quantity") %>'></asp:TextBox>
+                             
                             <asp:LinkButton runat="server" ID="btnRemove" Text="Remove" CommandName="Remove" CommandArgument='<%# Eval("ImageUrl")+","+Eval("Res") %>' style="font-size:12px;"></asp:LinkButton>  
   
                         </ItemTemplate></asp:TemplateField>
-<asp:BoundField DataField="TotalPrice" DataFormatString="{0:c}" 
-                HeaderText="Price" ReadOnly="True" />
+<asp:BoundField DataField="Price" 
+                HeaderText="UnitPrice" />
+    <asp:BoundField DataField="TotalPrice" HeaderText="TotalPrice" 
+        ReadOnly="True" />
 </Columns>
 <EmptyDataTemplate>
 Your Shopping Cart is empty, add items
