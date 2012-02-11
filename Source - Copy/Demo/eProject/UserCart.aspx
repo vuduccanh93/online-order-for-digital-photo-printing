@@ -1,4 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CartList.aspx.cs" Inherits="CartList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="UserCart.aspx.cs" Inherits="UserCart" %>
+
+<%@ Register src="CartControl.ascx" tagname="CartControl" tagprefix="uc1" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,8 +12,7 @@
     <form id="form1" runat="server">
     <div>
     
-        <asp:Table ID="tbMain" runat="server" Height="22px" Width="767px">
-        </asp:Table>
+        <uc1:CartControl ID="CartControl1" runat="server" />
     
     </div>
     </form>
