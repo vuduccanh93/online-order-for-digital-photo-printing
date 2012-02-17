@@ -43,15 +43,14 @@ public partial class CartControl : System.Web.UI.UserControl
         {
             if (row.RowType == DataControlRowType.DataRow)
             {
-                // We'll use a try catch block in case something other than a number is typed in
-                // If so, we'll just ignore it.
+                
                 try
                 {
-                    // Get the productId from the GridView's datakeys
-                    int productId = Convert.ToInt32(gvShoppingCart.DataKeys[row.RowIndex].Value);
+                    
+                    
                     string imageurl = row.Cells[1].Text;
                     string res = row.Cells[2].Text;
-                    // Find the quantity TextBox and retrieve the value
+                    
                     int quantity = Int32.Parse(((TextBox)row.Cells[3].FindControl("txtQuantity")).Text);
                     Cart.Instance.SetItemQuantity(imageurl,res,3);
                     
@@ -64,5 +63,4 @@ public partial class CartControl : System.Web.UI.UserControl
         
         
     }
-
 }
