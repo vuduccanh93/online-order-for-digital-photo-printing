@@ -5,8 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace ContactManagementDB
-{
+
     public class DBConnection
     {
         public static SqlConnection getConnection()
@@ -24,4 +23,4 @@ namespace ContactManagementDB
             }
         }
     }
-}
+
