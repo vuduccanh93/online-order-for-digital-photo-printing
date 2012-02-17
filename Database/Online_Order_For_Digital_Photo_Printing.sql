@@ -40,7 +40,7 @@ CREATE TABLE Orders (
 	OrderTime datetime,
 	ShippingAddress varchar(50),
 	PaymentDetail varchar(50),
-	OrderStatus int
+	OrderStatus varchar(10)
 )
 GO
 CREATE TABLE OrderDetails (
