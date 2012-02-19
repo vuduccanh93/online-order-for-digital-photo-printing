@@ -3,10 +3,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head runat="server">    
     <title></title>
+    <script type="text/javascript" src="Scripts/jquery-1.4.1.min.js"></script>    	
+    <script type="text/javascript" src="Scripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <link rel="stylesheet" type="text/css" href="Scripts/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+    
+ 	
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            $("a#image").fancybox();
+
+        });
+	</script>
 </head>
-<body>
+<body>    
     <form id="form1" runat="server">
     <div>
     
@@ -19,15 +31,25 @@
                         <%# Container.DataItemIndex + 1 %>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:ImageField DataImageUrlField="FileName">
-                </asp:ImageField>
+                <asp:TemplateField HeaderText="Image">
+                    <ItemTemplate>
+                        <a id="image" href='<%# Eval("FileName")%>'>
+                    <img alt="image" src='<%# Eval("FileName")%>?width=200' />
+                </a>            
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:DropDownList ID="DropDownList1" runat="server">
-                            <asp:ListItem>3x4</asp:ListItem>
-                            <asp:ListItem>4x6</asp:ListItem>
-                            <asp:ListItem>2x3</asp:ListItem>
+                            <asp:ListItem>300x400</asp:ListItem>
+                            <asp:ListItem>400x600</asp:ListItem>
+                            <asp:ListItem>200x300</asp:ListItem>
                         </asp:DropDownList>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Preview">
+                    <ItemTemplate>
+                        <asp:Button ID="Button1" runat="server" CommandName="Preview" CommandArgument='<%# Container.DataItemIndex %>' Text="Preview" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:ButtonField ButtonType="Button" Text="Add To Cart" CommandName="AddCart" />

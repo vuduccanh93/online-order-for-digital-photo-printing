@@ -40,12 +40,25 @@ public partial class Album : System.Web.UI.Page
     {
         int currentRowIndex = Int32.Parse(e.CommandArgument.ToString());
         GridViewRow gvr = GridView1.Rows[currentRowIndex];
-        string currentCommand = e.CommandName;        
+        string currentCommand = e.CommandName;
         string url = GridView1.DataKeys[currentRowIndex].Value.ToString();
         DropDownList ddl = (DropDownList)gvr.Cells[3].FindControl("DropDownList1");
         string res = ddl.SelectedValue;
-        Cart.Instance.AddItem(url, res, 100);
-        Response.Redirect("UserCart.aspx");
+        if (currentCommand == "AddCart")
+        {
+            
+            Cart.Instance.AddItem(url, res, 100);
+            Response.Redirect("UserCart.aspx");
+        }
+        if (currentCommand == "Preview")
+        {
+            string[] reso = res.Split(new char[] { 'x' });
+            string width = reso[0];
+            string height = reso[1];
+            string oriimg = url + "?width=" + width + "&height=" + height;
+            
+            Response.Write( "<script>window.open('"+ oriimg +"');</script>");
+        }
     }
 
 }
