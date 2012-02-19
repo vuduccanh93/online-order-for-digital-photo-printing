@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="OrderManagement.aspx.cs" Inherits="admin_OrderManagement" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="OrderSearch.aspx.cs" Inherits="admin_OrderSearch" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,7 +10,8 @@
     <form id="form1" runat="server">
     <div>
     
-        <asp:GridView ID="GridView1" runat="server" DataKeyNames="OrderID">
+        <asp:GridView ID="GridView1" runat="server" DataKeyNames="OrderID" 
+            Visible="False">
             <Columns>
                 <asp:HyperLinkField Text="View" DataNavigateUrlFields="OrderID" 
                     DataNavigateUrlFormatString="OrderDetail.aspx?id={0}" />
@@ -21,18 +22,16 @@
         </asp:GridView>
     
         <br />
+        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+&nbsp;&nbsp;&nbsp;
         <asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
-            Text="Filter Pending" />
-&nbsp;&nbsp;&nbsp;&nbsp;
+            Text="Search by ID" />
+        <br />
+        <br />
+        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+&nbsp;&nbsp;&nbsp;
         <asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
-            Text="Filter Shipped" />
-&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="Button3" runat="server" onclick="Button3_Click" 
-            Text="Filter Declined" />
-        <br />
-        <br />
-        <asp:Button ID="Button4" runat="server" onclick="Button4_Click" 
-            Text="All Order" />
+            Text="Search by Shipping Add" />
     
     </div>
     </form>
