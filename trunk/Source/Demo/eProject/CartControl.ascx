@@ -2,7 +2,7 @@
 <asp:GridView runat="server" ID="gvShoppingCart" AutoGenerateColumns="False" 
     GridLines="None" Width="100%" CellPadding="5" ShowFooter="True" 
     DataKeyNames="ImageUrl" OnRowDataBound="gvShoppingCart_RowDataBound" 
-    OnRowCommand="gvShoppingCart_RowCommand">  
+    OnRowCommand="gvShoppingCart_RowCommand" EnableModelValidation="True">  
                 <HeaderStyle HorizontalAlign="Left" BackColor="#3D7169" ForeColor="#FFFFFF" />  
                 <FooterStyle HorizontalAlign="Right" BackColor="#6C6B66" ForeColor="#FFFFFF" />  
                 <AlternatingRowStyle BackColor="#F8F8F8" /> 
@@ -31,4 +31,5 @@ Your Shopping Cart is empty, add items
 </EmptyDataTemplate>
 </asp:GridView>
 <br />
-            <asp:Button runat="server" ID="btnUpdateCart" Text="Update Cart"/>  
+            <asp:Button runat="server" ID="btnUpdateCart" Text="Update Cart" 
+    onclick="btnUpdateCart_Click1"/>  

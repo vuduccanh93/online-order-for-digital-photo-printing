@@ -50,3 +50,26 @@ CREATE TABLE OrderDetails (
 	Quantity int
 )
 
+
+INSERT INTO Customer VALUES ('longnh', '123456', 'Nguyen Hoang Long', '04/07/1988', 1, 'longnh@aptech.com.vn', 0979371098, 'Hoan Kiem - Ha Noi')
+GO
+INSERT INTO Customer VALUES ('hunglv', '123456', 'Le Viet Hung', '10/20/1989', 1, 'hunglv@aptech.com.vn', 123456789, 'Hoan Kiem - Ha Noi')
+GO
+INSERT INTO Customer VALUES ('tungpt', '123456', 'Pham Thanh Tung', '11/20/1989', 1, 'tungpt@aptech.com.vn', 0987654321, 'Hoan Kiem - Ha Noi')
+GO
+INSERT INTO Customer VALUES ('tienvv', '123456', 'Vu Van Tien', '08/03/1991', 1, 'tienvv@aptech.com.vn', 019284756, 'Hoan Kiem - Ha Noi')
+
+
+INSERT INTO Price VALUES ('800x600', 100)
+GO
+INSERT INTO Price VALUES ('1024x768', 200)
+GO
+INSERT INTO Price VALUES ('1400x900', 300)
+GO
+INSERT INTO Price VALUES ('1920x1080', 1000)
+
+
+INSERT INTO PaymentMethods VALUES ('Online')
+GO
+INSERT INTO PaymentMethods VALUES ('Direct')
+
