@@ -70,11 +70,7 @@ public partial class admin_OrderManagement : System.Web.UI.Page
         }
         con.Close();
     }
-    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-    {
-        GridView1.PageIndex = e.NewPageIndex;
-        GridView1.DataBind();
-    }
+    
     protected void Button4_Click(object sender, EventArgs e)
     {
         SqlConnection con = DBConnection.getConnection();
