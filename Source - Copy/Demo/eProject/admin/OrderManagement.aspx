@@ -10,12 +10,27 @@
     <form id="form1" runat="server">
     <div>
     
-        <asp:GridView ID="GridView1" runat="server" DataKeyNames="OrderID">
+        <asp:GridView ID="GridView1" runat="server" DataKeyNames="OrderID" 
+            onpageindexchanging="GridView1_PageIndexChanging">
             <Columns>
                 <asp:HyperLinkField Text="View" DataNavigateUrlFields="OrderID" 
                     DataNavigateUrlFormatString="OrderDetail.aspx?id={0}" />
             </Columns>
         </asp:GridView>
+    
+        <br />
+        <asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
+            Text="Filter Pending" />
+&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
+            Text="Filter Shipped" />
+&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="Button3" runat="server" onclick="Button3_Click" 
+            Text="Filter Declined" />
+        <br />
+        <br />
+        <asp:Button ID="Button4" runat="server" onclick="Button4_Click" 
+            Text="All Order" />
     
     </div>
     </form>
