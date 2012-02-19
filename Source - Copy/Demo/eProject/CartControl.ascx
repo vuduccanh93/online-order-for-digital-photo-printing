@@ -9,12 +9,13 @@
 <Columns>
 <asp:TemplateField>
     <ItemTemplate>
-    <asp:Image ID="Image1" runat="server" 
-    ImageUrl='<%#Eval("ImageUrl")%>'/>
+     <a id="image" href='<%# Eval("ImageUrl")%>'>
+                    <img alt="image" src='<%# Eval("ImageUrl")%>?width=200' />
+                </a>        
     </ItemTemplate>
 </asp:TemplateField>
 <asp:BoundField DataField="ImageUrl" 
-                HeaderText="ImageUrl" ReadOnly="True"/>
+                HeaderText="ImageUrl" ReadOnly="True" />
 <asp:BoundField DataField="Res" DataFormatString="{0:c}" 
                 HeaderText="Res" ReadOnly="True" />
     <asp:TemplateField HeaderText="Quantity"><ItemTemplate>  

@@ -7,6 +7,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <script type="text/javascript" src="Scripts/jquery-1.4.1.min.js"></script>    	
+    <script type="text/javascript" src="Scripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <link rel="stylesheet" type="text/css" href="Scripts/fancybox/jquery.fancybox-1.3.4.css" media="screen" />  
+ 	
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("a#image").fancybox();
+
+        });
+	</script>
 </head>
 <body>
     <form id="form1" runat="server">
