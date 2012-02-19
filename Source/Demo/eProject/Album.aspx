@@ -24,9 +24,7 @@
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:DropDownList ID="DropDownList1" runat="server">
-                            <asp:ListItem>3x4</asp:ListItem>
-                            <asp:ListItem>4x6</asp:ListItem>
-                            <asp:ListItem>2x3</asp:ListItem>
+                            
                         </asp:DropDownList>
                     </ItemTemplate>
                 </asp:TemplateField>
@@ -34,6 +32,26 @@
             </Columns>
             
         </asp:GridView>
+    
+        <asp:ObjectDataSource ID="odsRes" runat="server" 
+            DeleteMethod="Delete" InsertMethod="Insert" 
+            OldValuesParameterFormatString="original_{0}" SelectMethod="GetData" 
+            TypeName="OnlineOrderTableAdapters.PriceTableAdapter" 
+            UpdateMethod="Update">
+            <DeleteParameters>
+                <asp:Parameter Name="Original_RES" Type="String" />
+                <asp:Parameter Name="Original_Money" Type="Decimal" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="RES" Type="String" />
+                <asp:Parameter Name="Money" Type="Decimal" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="Money" Type="Decimal" />
+                <asp:Parameter Name="Original_RES" Type="String" />
+                <asp:Parameter Name="Original_Money" Type="Decimal" />
+            </UpdateParameters>
+        </asp:ObjectDataSource>
     
     </div>
     </form>

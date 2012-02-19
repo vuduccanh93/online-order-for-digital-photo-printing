@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Collections;
 
 public partial class Album : System.Web.UI.Page
 {
@@ -10,6 +12,7 @@ public partial class Album : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+
             Response.Cookies["username"].Value = "abc";
             string path = HttpContext.Current.Request.PhysicalApplicationPath + @"\Images\" + Request.Cookies["username"].Value;
             // string path = @"D:\Blog\Previous\ImageShow\Images\Temple"; // This statement also valid
@@ -31,7 +34,25 @@ public partial class Album : System.Web.UI.Page
             }
 
             GridView1.DataSource = imageFileList;
+            SqlDataReader dr;
+            SqlConnection con = DBConnection.getConnection();
+            SqlCommand cmd = new SqlCommand("SELECT RES FROM Price", con);
             GridView1.DataBind();
+            foreach (GridViewRow row in GridView1.Rows)
+            {
+                
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    string s = dr["RES"].ToString();
+                    Response.Write(s);
+                    ((DropDownList)row.Cells[2].FindControl("DropDownList1")).Items.Add(s);
+
+                }
+                dr.Close();
+            }
+            con.Close();
+            
         }
     }
 
@@ -44,7 +65,18 @@ public partial class Album : System.Web.UI.Page
         string url = GridView1.DataKeys[currentRowIndex].Value.ToString();
         DropDownList ddl = (DropDownList)gvr.Cells[3].FindControl("DropDownList1");
         string res = ddl.SelectedValue;
-        Cart.Instance.AddItem(url, res, 100);
+        int money = 0;
+        SqlDataReader dr;
+        SqlConnection con = DBConnection.getConnection();
+        SqlCommand cmd = new SqlCommand("SELECT Money FROM Price WHERE Res like @RES", con);
+        cmd.Parameters.Add(new SqlParameter("@RES", res));
+        dr = cmd.ExecuteReader();
+        while(dr.Read()) {
+            money = Int32.Parse(dr["Money"].ToString());
+        }
+        dr.Close();
+        con.Close();
+        Cart.Instance.AddItem(url, res, money);
 
         Response.Redirect("UserCart.aspx");
     }
