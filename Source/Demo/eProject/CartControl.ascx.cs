@@ -66,4 +66,8 @@ public partial class CartControl : System.Web.UI.UserControl
 
         ReBindGrid();
     }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Order.aspx");
+    }
 }

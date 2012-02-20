@@ -34,12 +34,13 @@ CREATE TABLE PaymentMethods (
 )
 GO
 CREATE TABLE Orders (
-	OrderID int PRIMARY KEY,
+	OrderID int PRIMARY KEY IDENTITY(1, 1),
 	CustomerID int FOREIGN KEY REFERENCES Customer(CustomerID),
 	PaymentMethodID int FOREIGN KEY REFERENCES PaymentMethods(PaymentMethodID),
 	OrderTime datetime,
 	ShippingAddress varchar(50),
 	PaymentDetail varchar(50),
+	TotalPrice numeric,
 	OrderStatus varchar(10)
 )
 GO
@@ -47,7 +48,8 @@ CREATE TABLE OrderDetails (
 	OrderDetailsID int PRIMARY KEY IDENTITY(1,1),
 	OrderID int FOREIGN KEY REFERENCES Orders(OrderID),
 	RES varchar(15) FOREIGN KEY REFERENCES Price(RES),
-	Quantity int
+	Quantity int,
+	TPrice numeric
 )
 
 

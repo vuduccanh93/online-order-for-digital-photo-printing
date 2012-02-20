@@ -40,8 +40,12 @@ public class CartItem : IEquatable<CartItem>
     public int TotalPrice
     {
         get { return Price * Quantity; }
-    } 
-	
+    }
+
+    public CartItem()
+    {
+        
+    }
     public CartItem(string imageUrl, string res, int price) {
         this.ImageUrl = imageUrl;
         this.Res = res;
