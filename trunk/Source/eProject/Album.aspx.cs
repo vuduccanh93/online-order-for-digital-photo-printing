@@ -77,7 +77,7 @@ public partial class Album : System.Web.UI.Page
             }
             dr.Close();
             con.Close();
-            Cart.Instance.AddItem(url, res, 100);
+            Cart.Instance.AddItem(url, res, money);
             Response.Redirect("UserCart.aspx");
         }
         if (currentCommand == "Preview")

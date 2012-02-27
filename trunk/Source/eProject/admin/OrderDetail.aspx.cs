@@ -60,6 +60,23 @@ public partial class admin_OrderDetail : System.Web.UI.Page
         cmd.Parameters.Add("@status", "Shipped");
         cmd.Parameters.Add("@orderid", orderid);
         cmd.ExecuteNonQuery();
+        SqlCommand cmd1 = new SqlCommand("SELECT * FROM Orders WHERE CustomerID = @customerid ", con);
+        cmd1.Parameters.Add("@customerid", DetailsView1.Rows[1].Cells[1].Text);
+        SqlDataReader reader = cmd1.ExecuteReader();
+        int count = 0;
+        while (reader.Read())
+        {
+            if (reader["OrderStatus"].ToString().Equals("Pending"))
+            {
+                count++;
+            }
+
+        }
+        if (count == 0)
+        {
+            string imgdir = Server.MapPath("Images");
+            System.IO.Directory.Delete(imgdir + "\\" + Request.Cookies["username"].Value,true);
+        }
         Response.Redirect(Request.RawUrl);
         con.Close();
     }
