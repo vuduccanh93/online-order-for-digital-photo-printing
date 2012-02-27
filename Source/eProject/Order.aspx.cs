@@ -122,43 +122,56 @@ public partial class Order : System.Web.UI.Page
     }
     protected void btnAccept_Click(object sender, EventArgs e)
     {
-        int id = 1;
-        DateTime datetime = DateTime.Now;
-        SqlConnection con = DBConnection.getConnection();
-        SqlCommand cmd = new SqlCommand("INSERT INTO Orders VALUES (@CustomerID, @PaymentMethodID, @OrderTime, @ShippingAddress, @PaymentDetail, @TotalPrice, @OrderStatus)", con);
-        cmd.Parameters.Add(new SqlParameter("@CustomerID", 1));
-        cmd.Parameters.Add(new SqlParameter("@PaymentMethodID", id));
-        cmd.Parameters.Add(new SqlParameter("@OrderTime", datetime));
-        cmd.Parameters.Add(new SqlParameter("@ShippingAddress", txtAddress3.Text));
-        cmd.Parameters.Add(new SqlParameter("@PaymentDetail", "Online Payment"));
-        cmd.Parameters.Add(new SqlParameter("@TotalPrice", Int32.Parse(Cart.Instance.GetSubTotal().ToString())));
-        cmd.Parameters.Add(new SqlParameter("@OrderStatus", "Pending"));
-        cmd.ExecuteNonQuery();
-        con.Close();
-
-        IEnumerator enm = Cart.Instance.Items.GetEnumerator();
-        while (enm.MoveNext())
+        CCEncrypt cce = new CCEncrypt();
+        string ccencrypted = cce.EncryptTripleDES(txtCardNumber.Text, "aptech");
+        ccservice.Service ccser = new ccservice.Service();
+        bool valid = ccser.CheckCC(ccencrypted).CardValid;
+        string ct = ccser.CheckCC(ccencrypted).CardType;
+        if (valid == true)
         {
-            Object obj = enm.Current;
-            CartItem item = new CartItem();
-            item = (CartItem)obj;
+            Label9.Visible = false;
+            int id = 1;
+            DateTime datetime = DateTime.Now;
+            SqlConnection con = DBConnection.getConnection();
+            SqlCommand cmd = new SqlCommand("INSERT INTO Orders VALUES (@CustomerID, @PaymentMethodID, @OrderTime, @ShippingAddress, @PaymentDetail, @TotalPrice, @OrderStatus)", con);
+            cmd.Parameters.Add(new SqlParameter("@CustomerID", 1));
+            cmd.Parameters.Add(new SqlParameter("@PaymentMethodID", id));
+            cmd.Parameters.Add(new SqlParameter("@OrderTime", datetime));
+            cmd.Parameters.Add(new SqlParameter("@ShippingAddress", txtAddress3.Text));
+            cmd.Parameters.Add(new SqlParameter("@PaymentDetail", ct));
+            cmd.Parameters.Add(new SqlParameter("@TotalPrice", Int32.Parse(Cart.Instance.GetSubTotal().ToString())));
+            cmd.Parameters.Add(new SqlParameter("@OrderStatus", "Pending"));
+            cmd.ExecuteNonQuery();
+            con.Close();
 
-            SqlDataReader dr;
-            SqlConnection con1 = DBConnection.getConnection();
-            SqlCommand cmd1 = new SqlCommand("INSERT INTO OrderDetails VALUES (@OrderID, @RES, @Quantity, @TPrice)", con1);
-            SqlCommand cmd2 = new SqlCommand("SELECT TOP 1 * FROM Orders Order BY OrderID DESC", con1);
-            dr = cmd2.ExecuteReader();
-            while (dr.Read())
+            IEnumerator enm = Cart.Instance.Items.GetEnumerator();
+            while (enm.MoveNext())
             {
-                cmd1.Parameters.Add(new SqlParameter("@OrderID", dr["OrderID"]));
+                Object obj = enm.Current;
+                CartItem item = new CartItem();
+                item = (CartItem)obj;
+
+                SqlDataReader dr;
+                SqlConnection con1 = DBConnection.getConnection();
+                SqlCommand cmd1 = new SqlCommand("INSERT INTO OrderDetails VALUES (@OrderID, @RES, @Quantity, @TPrice)", con1);
+                SqlCommand cmd2 = new SqlCommand("SELECT TOP 1 * FROM Orders Order BY OrderID DESC", con1);
+                dr = cmd2.ExecuteReader();
+                while (dr.Read())
+                {
+                    cmd1.Parameters.Add(new SqlParameter("@OrderID", dr["OrderID"]));
+                }
+                dr.Close();
+                cmd1.Parameters.Add(new SqlParameter("@RES", item.Res));
+                cmd1.Parameters.Add(new SqlParameter("@Quantity", item.Quantity));
+                cmd1.Parameters.Add(new SqlParameter("@TPrice", item.TotalPrice));
+                cmd1.ExecuteNonQuery();
+                con1.Close();
             }
-            dr.Close();
-            cmd1.Parameters.Add(new SqlParameter("@RES", item.Res));
-            cmd1.Parameters.Add(new SqlParameter("@Quantity", item.Quantity));
-            cmd1.Parameters.Add(new SqlParameter("@TPrice", item.TotalPrice));
-            cmd1.ExecuteNonQuery();
-            con1.Close();
+            MultiView1.ActiveViewIndex = 0;
         }
-        MultiView1.ActiveViewIndex = 0;
+        else
+        {
+            Label9.Visible = true;
+        }
     }
 }

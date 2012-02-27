@@ -141,9 +141,12 @@
                         </td>
                         <td align="left" class="style2" width="50%">
                             <asp:TextBox ID="txtCardNumber" runat="server" Width="200px"></asp:TextBox>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:Label ID="Label9" runat="server" ForeColor="Red" 
+                                Text="Your Credit Card Number is invalid" Visible="False"></asp:Label>
                         </td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td align="right" width="50%">
                             <asp:Button ID="btnAccept" runat="server" onclick="btnAccept_Click" 
                                 Text="Accept" />
@@ -157,7 +160,7 @@
             </asp:View>
             <asp:View ID="vPaymentMethod" runat="server">
                 <table style="width:100%;">
-                     <tr>
+                    <tr>
                         <td align="right" class="style2" width="50%">
                             <asp:Label ID="Label3" runat="server" Text="Choose payment method:"></asp:Label>
                         </td>
@@ -166,7 +169,7 @@
                             </asp:DropDownList>
                         </td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td align="right" width="50%">
                             <asp:Button ID="btnContinue" runat="server" onclick="btnContinue_Click" 
                                 Text="Continue" />
@@ -181,7 +184,7 @@
                 <asp:Panel ID="Panel1" runat="server">
                     <table style="width: 100%; margin-top: 15px;">
                         <tr>
-                            <td align="center" class="style1" colspan=2>
+                            <td align="center" class="style1" colspan="2">
                                 <asp:Label ID="Label1" runat="server" Text="Sender Information"></asp:Label>
                             </td>
                         </tr>
@@ -218,16 +221,15 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" width="100%" colspan=2>
-                               
-                            </td>
+                            <td align="center" colspan="2" width="100%">
+                                &nbsp;</td>
                         </tr>
                     </table>
                 </asp:Panel>
                 <asp:Panel ID="Panel2" runat="server">
                     <table style="width: 100%; margin-top: 15px;">
                         <tr>
-                            <td align="center" class="style1" colspan=2>
+                            <td align="center" class="style1" colspan="2">
                                 <asp:Label ID="Label2" runat="server" Text="Receiver Information"></asp:Label>
                             </td>
                         </tr>
@@ -264,14 +266,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" width="100%" colspan=2>
-                                
+                            <td align="center" colspan="2" width="100%">
                             </td>
                         </tr>
                         <tr>
-                             <td align="right" width="50%">
-                                 <asp:Button ID="btnSubmit" runat="server" Text="Continue" 
-                                     onclick="btnSubmit_Click" />
+                            <td align="right" width="50%">
+                                <asp:Button ID="btnSubmit" runat="server" onclick="btnSubmit_Click" 
+                                    Text="Continue" />
                             </td>
                             <td align="left" width="50%">
                                 <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
