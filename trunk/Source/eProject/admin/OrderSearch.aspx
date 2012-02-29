@@ -1,13 +1,24 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="OrderSearch.aspx.cs" Inherits="admin_OrderSearch" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/admin/Admin.master" CodeFile="OrderSearch.aspx.cs" Inherits="admin_OrderSearch" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+    <div id="header">
+        	<h2>Admin Area</h2>
+    <div id="topmenu">
+            	<ul>
+                	
+                    <li><a href="OrderManagement.aspx">Orders</a></li>                	
+                    <li class="current"><a href="OrderSearch.aspx">Search Orders</a></li>                    
+                    <li><a href="CustomerList.aspx">Customers</a></li>
+                    <li><a href="CustomerSearch.aspx">Search Customers</a></li>
+                    <li><a href="PriceMan.aspx">Price Manager</a></li>
+                    
+              </ul>
+          </div>
+      </div>
+      
+        
+        <div id="wrapper">
+            <div id="content">
     <div>
     
         <asp:GridView ID="GridView1" runat="server" DataKeyNames="OrderID" 
@@ -25,15 +36,21 @@
         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
 &nbsp;&nbsp;&nbsp;
         <asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
-            Text="Search by ID" />
+            Text="Search by ID" ValidationGroup="1" />
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+            ControlToValidate="TextBox1" ErrorMessage="ID not null" ValidationGroup="1"></asp:RequiredFieldValidator>
         <br />
         <br />
         <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
 &nbsp;&nbsp;&nbsp;
         <asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
-            Text="Search by Shipping Add" />
+            Text="Search by Shipping Add" ValidationGroup="2" />
+    
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+            ControlToValidate="TextBox2" ErrorMessage="Address not null" 
+            ValidationGroup="2"></asp:RequiredFieldValidator>
     
     </div>
-    </form>
-</body>
-</html>
+           		</div>	
+        </div>
+</asp:Content>

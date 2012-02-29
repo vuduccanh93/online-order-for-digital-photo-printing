@@ -10,6 +10,14 @@ public partial class admin_OrderManagement : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Request.Cookies["Loggedin"] == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
+        if (!Request.Cookies["Loggedin"].Value.Equals("y"))
+        {
+            Response.Redirect("Login.aspx");
+        }
         SqlConnection con = DBConnection.getConnection();
         SqlCommand cmd = new SqlCommand("SELECT * FROM Orders ORDER BY OrderTime DESC", con);
         SqlDataReader reader = cmd.ExecuteReader();        

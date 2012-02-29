@@ -1,13 +1,24 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PriceMan.aspx.cs" Inherits="admin_PriceMan" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/admin/Admin.master" CodeFile="PriceMan.aspx.cs" Inherits="admin_PriceMan" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+    <div id="header">
+        	<h2>Admin Area</h2>
+    <div id="topmenu">
+            	<ul>
+                	
+                    <li><a href="OrderManagement.aspx">Orders</a></li>                	
+                    <li><a href="OrderSearch.aspx">Search Orders</a></li>                    
+                    <li><a href="CustomerList.aspx">Customers</a></li>
+                    <li><a href="CustomerSearch.aspx">Search Customers</a></li>
+                    <li class="current"><a href="PriceMan.aspx">Price Manager</a></li>
+                    
+              </ul>
+          </div>
+      </div>
+      
+        
+        <div id="wrapper">
+            <div id="content">
     <div>
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
     DataKeyNames="RES" DataSourceID="SqlDataSource1">
@@ -19,7 +30,7 @@
     </Columns>
 </asp:GridView>
 <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-    ConnectionString="<%$ ConnectionStrings:Online_Order_For_Digital_Photo_PrintingConnectionString %>" 
+    ConnectionString="<%$ ConnectionStrings:myCon %>" 
     DeleteCommand="DELETE FROM [Price] WHERE [RES] = @RES" 
     InsertCommand="INSERT INTO [Price] ([RES], [Money]) VALUES (@RES, @Money)" 
     SelectCommand="SELECT [RES], [Money] FROM [Price]" 
@@ -37,6 +48,6 @@
     </UpdateParameters>
 </asp:SqlDataSource>
     </div>
-    </form>
-</body>
-</html>
+           		</div>	
+        </div>
+</asp:Content>

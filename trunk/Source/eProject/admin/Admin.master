@@ -1,0 +1,45 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Admin.master.cs" Inherits="admin_Admin" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/theme4.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript">
+    var StyleFile = "theme" + document.cookie.charAt(6) + ".css";
+    document.writeln('<link rel="stylesheet" type="text/css" href="css/' + StyleFile + '">');
+</script>
+<script type="text/javascript">
+    function ChangeCalendarView(sender, args) {
+        sender._switchMode("years", true);
+    }
+</script>
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" href="css/ie-sucks.css" />
+<![endif]-->
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="Form1" runat="server">
+	<div id="container">
+    	<asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+        <div id="sidebar">
+  				Welcome 
+            <asp:Label ID="Label1" runat="server"></asp:Label>
+                <br />
+                <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Logout" />
+          </div>
+        <div id="footer">
+        <div id="credits">
+   		Group 4 - C0911I
+        </div>
+        <br />
+
+        </div>
+</div>
+</form>
+</body>
+</html>

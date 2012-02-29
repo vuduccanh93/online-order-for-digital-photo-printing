@@ -1,20 +1,25 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="OrderManagement.aspx.cs" Inherits="admin_OrderManagement" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/admin/Admin.master" CodeFile="OrderManagement.aspx.cs" Inherits="admin_OrderManagement" %>
 <%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-    <script type="text/javascript">
-function ChangeCalendarView(sender,args)
-{
-   sender._switchMode("years", true);           
-}
-</script>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+    <div id="header">
+        	<h2>Admin Area</h2>
+    <div id="topmenu">
+            	<ul>
+                	
+                    <li class="current"><a href="OrderManagement.aspx">Orders</a></li>                	
+                    <li><a href="OrderSearch.aspx">Search Orders</a></li>                    
+                    <li><a href="CustomerList.aspx">Customers</a></li>
+                    <li><a href="CustomerSearch.aspx">Search Customers</a></li>
+                    <li><a href="PriceMan.aspx">Price Manager</a></li>
+                    
+              </ul>
+          </div>
+      </div>
+      
+        
+        <div id="wrapper">
+            <div id="content">
     <div>
         
         <asp:GridView ID="GridView1" runat="server" DataKeyNames="OrderID">
@@ -41,9 +46,17 @@ function ChangeCalendarView(sender,args)
         <asp:Button ID="Button4" runat="server" onclick="Button4_Click" 
             Text="All Order" />
             <br />
-        <asp:TextBox ID="txtDate1" runat="server"></asp:TextBox>  &nbsp;&nbsp;&nbsp;&nbsp;  <asp:TextBox ID="txtDate2" runat="server"></asp:TextBox>&nbsp;&nbsp;&nbsp; <asp:Button
+        <asp:TextBox ID="txtDate1" runat="server"></asp:TextBox>  &nbsp;&nbsp;&nbsp;&nbsp;  <asp:TextBox ID="txtDate2" runat="server"></asp:TextBox>&nbsp;&nbsp;&nbsp; 
+        <asp:Button
             ID="Button5" runat="server" Text="Filter By Date" 
-            onclick="Button5_Click" />
+            onclick="Button5_Click" ValidationGroup="1" />
+        
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+            ControlToValidate="txtDate1" ErrorMessage="Must choose Date" 
+            ValidationGroup="1"></asp:RequiredFieldValidator>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+            ControlToValidate="txtDate2" ErrorMessage="Must choose Date" 
+            ValidationGroup="1"></asp:RequiredFieldValidator>
         
         <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
         </ajaxToolkit:ToolkitScriptManager>
@@ -52,6 +65,6 @@ function ChangeCalendarView(sender,args)
         <ajaxToolkit:CalendarExtender ID="CalendarExtender2" TargetControlID="txtDate2" OnClientShown="ChangeCalendarView" runat="server">
         </ajaxToolkit:CalendarExtender>
     </div>
-    </form>
-</body>
-</html>
+           		</div>	
+        </div>
+</asp:Content>

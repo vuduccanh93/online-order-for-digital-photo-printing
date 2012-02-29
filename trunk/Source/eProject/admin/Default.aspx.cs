@@ -5,15 +5,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class admin_PriceMan : System.Web.UI.Page
+public partial class admin_Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.Cookies["Loggedin"] == null)
+        if (Request.Cookies["Loggedin"].Value == "y")
         {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("OrderManagement.aspx");
         }
-        if (!Request.Cookies["Loggedin"].Value.Equals("y"))
+        else
         {
             Response.Redirect("Login.aspx");
         }

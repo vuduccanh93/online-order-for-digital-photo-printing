@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class admin_PriceMan : System.Web.UI.Page
+public partial class admin_CustomerList : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
