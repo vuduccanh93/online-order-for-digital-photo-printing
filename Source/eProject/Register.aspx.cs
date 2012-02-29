@@ -12,7 +12,13 @@ public partial class Default2 : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Request.Cookies["UserName"] != null)
+        {
+            if (!Request.Cookies["UserName"].Value.Equals(""))
+            {
+                Response.Redirect("CustomerPanel.aspx");
+            }
+        }
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {

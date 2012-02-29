@@ -10,9 +10,16 @@ public partial class Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        if (Request.Cookies["Loggedin"] != null)
+        {
+            if (Request.Cookies["Loggedin"].Value.Equals("y"))
+            {
+                Response.Redirect("OrderManagement.aspx");
+            }
+        }
+
     }
-    protected void btnLogin_Click(object sender, EventArgs e)
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
         SqlConnection con1 = DBConnection.getConnection();
         SqlCommand cmd1 = new SqlCommand("SELECT * FROM Administrator WHERE UserName = @username AND Password = @password", con1);
@@ -22,12 +29,12 @@ public partial class Login : System.Web.UI.Page
         if (reader.HasRows)
         {
             while (reader.Read())
-            {                                
-                Response.Cookies["username"].Value = reader["UserName"].ToString();
+            {
+                Response.Cookies["admin"].Value = reader["UserName"].ToString();
                 Response.Cookies["Loggedin"].Value = "y";
             }
             Response.Redirect("OrderManagement.aspx");
-            
+
         }
         else
         {

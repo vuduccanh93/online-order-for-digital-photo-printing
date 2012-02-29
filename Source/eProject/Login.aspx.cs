@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +10,13 @@ public partial class Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Request.Cookies["UserName"] != null)
+        {
+            if (!Request.Cookies["UserName"].Value.Equals(""))
+            {
+                Response.Redirect("CustomerPanel.aspx");
+            }
+        }
     }
     protected void btnLogin_Click(object sender, EventArgs e)
     {
@@ -23,8 +29,10 @@ public partial class Login : System.Web.UI.Page
         {
             Response.Cookies["UserName"].Value = txtUserName.Text;
             Response.Cookies["Password"].Value = txtPwd1.Text;
-            Response.Redirect("Album.aspx");
-            
+            Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(30);
+            Response.Cookies["Password"].Expires = DateTime.Now.AddDays(30);
+            Response.Redirect("Upload.aspx");
+
         }
         else
         {

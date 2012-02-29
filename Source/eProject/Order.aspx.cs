@@ -11,33 +11,45 @@ public partial class Order : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack) {
-
-            SqlDataReader dr1;
-            SqlConnection con1 = DBConnection.getConnection();
-            SqlCommand cmd1 = new SqlCommand("SELECT * FROM PaymentMethods", con1);
-            dr1 = cmd1.ExecuteReader();
-            while (dr1.Read())
+            if (Request.Cookies["UserName"] == null)
             {
-                ddlPaymentMethod.Items.Add(dr1["PaymentMethod"].ToString());
+                Response.Redirect("Login.aspx");
             }
-            dr1.Close();
-            con1.Close();
-
-            SqlDataReader dr;
-            SqlConnection con = DBConnection.getConnection();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Customer WHERE UserName like @UserName", con);
-            cmd.Parameters.Add(new SqlParameter("@UserName", "longnh"));
-            dr = cmd.ExecuteReader();
-            while (dr.Read())
+            else
             {
-                txtFullName.Text = dr["CustomerName"].ToString();
-                txtAddress.Text = dr["Address"].ToString();
-                txtEmail.Text = dr["Email"].ToString();
-                txtPhoneNumber.Text = dr["PhoneNumber"].ToString();
+
+                txtFullName.Enabled = false;
+                txtAddress.Enabled = false;
+                txtPhoneNumber.Enabled = false;
+                txtEmail.Enabled = false;
+
+                SqlDataReader dr1;
+                SqlConnection con1 = DBConnection.getConnection();
+                SqlCommand cmd1 = new SqlCommand("SELECT * FROM PaymentMethods", con1);
+                dr1 = cmd1.ExecuteReader();
+                while (dr1.Read())
+                {
+                    ddlPaymentMethod.Items.Add(dr1["PaymentMethod"].ToString());
+                }
+                dr1.Close();
+                con1.Close();
+
+                SqlDataReader dr;
+                SqlConnection con = DBConnection.getConnection();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Customer WHERE UserName like @UserName", con);
+                cmd.Parameters.Add(new SqlParameter("@UserName", Request.Cookies["UserName"].Value));
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    txtFullName.Text = dr["CustomerName"].ToString();
+                    txtAddress.Text = dr["Address"].ToString();
+                    txtEmail.Text = dr["Email"].ToString();
+                    txtPhoneNumber.Text = dr["PhoneNumber"].ToString();
+                }
+                dr.Close();
+                con.Close();
+                MultiView1.ActiveViewIndex = 5;
             }
-            dr.Close();
-            con.Close();
-            MultiView1.ActiveViewIndex = 5;
         }
         
     }
@@ -70,8 +82,10 @@ public partial class Order : System.Web.UI.Page
         else {
             id = 2;
             SqlConnection con = DBConnection.getConnection();
-            SqlCommand cmd = new SqlCommand("INSERT INTO Orders VALUES (@CustomerID, @PaymentMethodID, @OrderTime, @ShippingAddress, @PaymentDetail, @TotalPrice, @OrderStatus,)", con);
-            cmd.Parameters.Add(new SqlParameter("@CustomerID", 1));
+            SqlCommand cmd = new SqlCommand("INSERT INTO Orders VALUES ((SELECT Customer.CustomerID FROM Customer WHERE Customer.UserName = @UserName), @PaymentMethodID, @OrderTime, @ShippingAddress, @PaymentDetail, @TotalPrice, @OrderStatus)", con);
+            //SqlConnection con0 = DBConnection.getConnection();
+            //SqlCommand cmd0 = new SqlCommand(" SELECT CustomerID FROM", con0);
+            cmd.Parameters.Add(new SqlParameter("@UserName", Request.Cookies["UserName"].Value));
             cmd.Parameters.Add(new SqlParameter("@PaymentMethodID", id));
             cmd.Parameters.Add(new SqlParameter("@OrderTime", datetime));
             cmd.Parameters.Add(new SqlParameter("@ShippingAddress", txtAddress3.Text));
@@ -97,8 +111,8 @@ public partial class Order : System.Web.UI.Page
                     cmd1.Parameters.Add(new SqlParameter("@OrderID", dr["OrderID"]));
                 }
                 dr.Close();
-                cmd1.Parameters.Add(new SqlParameter("@RES", item.Res));
                 cmd1.Parameters.Add(new SqlParameter("@ImageUrl", item.ImageUrl));
+                cmd1.Parameters.Add(new SqlParameter("@RES", item.Res));
                 cmd1.Parameters.Add(new SqlParameter("@Quantity", item.Quantity));
                 cmd1.Parameters.Add(new SqlParameter("@TPrice", item.TotalPrice));
                 cmd1.ExecuteNonQuery();
@@ -133,8 +147,8 @@ public partial class Order : System.Web.UI.Page
             int id = 1;
             DateTime datetime = DateTime.Now;
             SqlConnection con = DBConnection.getConnection();
-            SqlCommand cmd = new SqlCommand("INSERT INTO Orders VALUES (@CustomerID, @PaymentMethodID, @OrderTime, @ShippingAddress, @PaymentDetail, @TotalPrice, @OrderStatus)", con);
-            cmd.Parameters.Add(new SqlParameter("@CustomerID", 1));
+            SqlCommand cmd = new SqlCommand("INSERT INTO Orders VALUES ((SELECT Customer.CustomerID FROM Customer WHERE Customer.UserName = @UserName), @PaymentMethodID, @OrderTime, @ShippingAddress, @PaymentDetail, @TotalPrice, @OrderStatus)", con);
+            cmd.Parameters.Add(new SqlParameter("@UserName", Request.Cookies["UserName"].Value));
             cmd.Parameters.Add(new SqlParameter("@PaymentMethodID", id));
             cmd.Parameters.Add(new SqlParameter("@OrderTime", datetime));
             cmd.Parameters.Add(new SqlParameter("@ShippingAddress", txtAddress3.Text));
@@ -153,7 +167,7 @@ public partial class Order : System.Web.UI.Page
 
                 SqlDataReader dr;
                 SqlConnection con1 = DBConnection.getConnection();
-                SqlCommand cmd1 = new SqlCommand("INSERT INTO OrderDetails VALUES (@OrderID, @RES, @Quantity, @TPrice)", con1);
+                SqlCommand cmd1 = new SqlCommand("INSERT INTO OrderDetails VALUES (@OrderID, @ImageUrl, @RES, @Quantity, @TPrice)", con1);
                 SqlCommand cmd2 = new SqlCommand("SELECT TOP 1 * FROM Orders Order BY OrderID DESC", con1);
                 dr = cmd2.ExecuteReader();
                 while (dr.Read())
@@ -161,6 +175,7 @@ public partial class Order : System.Web.UI.Page
                     cmd1.Parameters.Add(new SqlParameter("@OrderID", dr["OrderID"]));
                 }
                 dr.Close();
+                cmd1.Parameters.Add(new SqlParameter("@ImageUrl", item.ImageUrl));
                 cmd1.Parameters.Add(new SqlParameter("@RES", item.Res));
                 cmd1.Parameters.Add(new SqlParameter("@Quantity", item.Quantity));
                 cmd1.Parameters.Add(new SqlParameter("@TPrice", item.TotalPrice));
@@ -173,5 +188,16 @@ public partial class Order : System.Web.UI.Page
         {
             Label9.Visible = true;
         }
+    }
+    protected void btnCopy_Click(object sender, EventArgs e)
+    {
+        txtFullName1.Text = txtFullName.Text;
+        txtAddress1.Text = txtAddress.Text;
+        txtEmail1.Text = txtEmail.Text;
+        txtPhoneNumber1.Text = txtPhoneNumber.Text;
+    }
+    protected void btnProfile_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CustomerPanel.aspx");
     }
 }

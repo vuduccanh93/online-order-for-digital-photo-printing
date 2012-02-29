@@ -1,23 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Order.aspx.cs" Inherits="Order" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeFile="Order.aspx.cs" Inherits="Order" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-    <style type="text/css">
-        .style1
-        {
-            height: 27px;
-        }
-        .style2
-        {
-            height: 23px;
-        }
-    </style>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content  ID="BodyContent"  runat="server"  ContentPlaceHolderID="MainContent">
     <div>
     
         <asp:MultiView ID="MultiView1" runat="server">
@@ -91,7 +74,7 @@
                             </td>
                             <td align="left" class="style1" width="50%">
                                 <asp:TextBox ID="txtFullName3" runat="server" Enabled="False" Width="200px"></asp:TextBox>
-                            </td>
+                                &nbsp;</td>
                         </tr>
                         <tr>
                             <td align="right" width="50%">
@@ -193,7 +176,7 @@
                                 <asp:Label ID="lblFullName" runat="server" Text="Full Name:"></asp:Label>
                             </td>
                             <td align="left" class="style1" width="50%">
-                                <asp:TextBox ID="txtFullName" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="txtFullName" runat="server" Width="200px" Enabled="False"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -201,7 +184,7 @@
                                 <asp:Label ID="lblAddress" runat="server" Text="Address:"></asp:Label>
                             </td>
                             <td align="left" width="50%">
-                                <asp:TextBox ID="txtAddress" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="txtAddress" runat="server" Width="200px" Enabled="False"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -209,7 +192,7 @@
                                 <asp:Label ID="lblEmail" runat="server" Text="Email:"></asp:Label>
                             </td>
                             <td align="left" width="50%">
-                                <asp:TextBox ID="txtEmail" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="txtEmail" runat="server" Width="200px" Enabled="False"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -217,12 +200,17 @@
                                 <asp:Label ID="lblPhoneNumber" runat="server" Text="Phone Number:"></asp:Label>
                             </td>
                             <td align="left" width="50%">
-                                <asp:TextBox ID="txtPhoneNumber" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="txtPhoneNumber" runat="server" Width="200px" Enabled="False"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="2" width="100%">
-                                &nbsp;</td>
+                            <td align="right" width="50%">
+                                &nbsp;<asp:Label ID="Label11" runat="server" Text="Edit sender information?"></asp:Label>
+                            </td>
+                            <td align="left" width="50%">
+                                <asp:Button ID="btnProfile" runat="server" onclick="btnProfile_Click" 
+                                    Text="Go to Profile" />
+                            </td>
                         </tr>
                     </table>
                 </asp:Panel>
@@ -238,7 +226,11 @@
                                 <asp:Label ID="lblFullName0" runat="server" Text="Full Name:"></asp:Label>
                             </td>
                             <td align="left" class="style1" width="50%">
-                                <asp:TextBox ID="txtFullName1" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="txtFullName1" runat="server" Width="200px" 
+                                    ValidationGroup="validate"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                    ControlToValidate="txtFullName1" ErrorMessage="Full name must not empy!" 
+                                    ForeColor="Red" ValidationGroup="validate"></asp:RequiredFieldValidator>
                             </td>
                         </tr>
                         <tr>
@@ -246,7 +238,11 @@
                                 <asp:Label ID="lblAddress0" runat="server" Text="Address:"></asp:Label>
                             </td>
                             <td align="left" width="50%">
-                                <asp:TextBox ID="txtAddress1" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="txtAddress1" runat="server" Width="200px" 
+                                    ValidationGroup="validate"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                    ControlToValidate="txtAddress1" ErrorMessage="Address must not empy!" 
+                                    ForeColor="Red" ValidationGroup="validate"></asp:RequiredFieldValidator>
                             </td>
                         </tr>
                         <tr>
@@ -254,7 +250,12 @@
                                 <asp:Label ID="lblEmail0" runat="server" Text="Email:"></asp:Label>
                             </td>
                             <td align="left" width="50%">
-                                <asp:TextBox ID="txtEmail1" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="txtEmail1" runat="server" Width="200px" 
+                                    ValidationGroup="validate"></asp:TextBox>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+                                    ControlToValidate="txtEmail1" ErrorMessage="Email not Correct!" ForeColor="Red" 
+                                    ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" 
+                                    ValidationGroup="validate"></asp:RegularExpressionValidator>
                             </td>
                         </tr>
                         <tr>
@@ -262,17 +263,26 @@
                                 <asp:Label ID="lblPhoneNumber0" runat="server" Text="Phone Number:"></asp:Label>
                             </td>
                             <td align="left" width="50%">
-                                <asp:TextBox ID="txtPhoneNumber1" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="txtPhoneNumber1" runat="server" Width="200px" 
+                                    ValidationGroup="validate"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                    ControlToValidate="txtPhoneNumber1" ErrorMessage="Phone number must not empty!" 
+                                    ForeColor="Red" ValidationGroup="validate"></asp:RequiredFieldValidator>
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="2" width="100%">
+                            <td align="right" width="50%">
+                                &nbsp;<asp:Label ID="Label10" runat="server" Text="Same as above?"></asp:Label>
+                            </td>
+                            <td align="left" width="50%">
+                                <asp:Button ID="btnCopy" runat="server" Text="Click Here" 
+                                    onclick="btnCopy_Click" />
                             </td>
                         </tr>
                         <tr>
                             <td align="right" width="50%">
                                 <asp:Button ID="btnSubmit" runat="server" onclick="btnSubmit_Click" 
-                                    Text="Continue" />
+                                    Text="Continue" ValidationGroup="validate" />
                             </td>
                             <td align="left" width="50%">
                                 <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
@@ -284,6 +294,4 @@
         </asp:MultiView>
     
     </div>
-    </form>
-</body>
-</html>
+</asp:Content>
