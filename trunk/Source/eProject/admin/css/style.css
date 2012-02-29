@@ -44,14 +44,14 @@ select{
 margin-top:10px;
 }
 #content{
-	width:740px;
+	width:800px;
 	float:left;
 	margin:10px 0 10px 0;
 	padding:10px;
 }
 #sidebar{
 	background:#FFF;
-	width:170px;
+	width:100px;
 	float:right;
 	margin:10px 0 10px 0;
 	padding:10px;
@@ -216,19 +216,39 @@ clear:both;
 /*********************
 		Tables
 *********************/
-table{
-	margin:5px;
+table
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;	
+	
+	text-align: left;
 	border-collapse: collapse;
-	table-layout:automatic;
-	width:98%;
+	background: url('table-images/patternb.png');
 }
-
-td, th{
-	padding: 2px;
-} 
-
-thead{
-
+thead tr
+{
+	background: url('table-images/patternb-head.png');
+}
+th
+{
+	font-size: 12px;
+	font-weight: normal;
+	padding: 8px;
+	border-bottom: 1px solid #fff;
+	color: #039;
+}
+td
+{
+	padding: 8px; 
+	padding-right:0px;
+	border-bottom: 1px solid #fff;
+	color: #669;
+	border-top: 1px solid transparent;
+}
+tbody tr:hover td
+{
+	color: #339;
+	background: #cdcdee;
 }
 /*********************
 		Home

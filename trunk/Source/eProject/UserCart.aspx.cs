@@ -8,6 +8,9 @@ public partial class UserCart : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Request.Cookies["UserName"] == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
     }
 }

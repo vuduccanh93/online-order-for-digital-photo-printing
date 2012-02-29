@@ -35,6 +35,9 @@ Your Shopping Cart is empty, add items
 </EmptyDataTemplate>
 </asp:GridView>
 <br />
+            <asp:Button ID="btnAddMore" runat="server" 
+    onclick="btnAddMore_Click" Text="Add more image" />
+&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button runat="server" ID="btnUpdateCart" Text="Update Cart" 
     onclick="btnUpdateCart_Click"/>  
 &nbsp;&nbsp;&nbsp;&nbsp;

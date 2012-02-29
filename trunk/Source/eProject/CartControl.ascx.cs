@@ -74,4 +74,8 @@ public partial class CartControl : System.Web.UI.UserControl
 
         ReBindGrid();
     }
+    protected void btnAddMore_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Album.aspx");
+    }
 }

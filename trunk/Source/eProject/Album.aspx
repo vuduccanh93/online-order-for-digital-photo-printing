@@ -1,13 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Album.aspx.cs" Inherits="Album" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeFile="Album.aspx.cs" Inherits="Album" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">    
-    <title></title>
+<asp:Content  ID="BodyContent"  runat="server"  ContentPlaceHolderID="MainContent">
     <script type="text/javascript" src="Scripts/jquery-1.4.1.min.js"></script>    	
     <script type="text/javascript" src="Scripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <link rel="stylesheet" type="text/css" href="Scripts/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+    
     
  	
     <script type="text/javascript">
@@ -17,9 +13,7 @@
 
         });
 	</script>
-</head>
-<body>    
-    <form id="form1" runat="server">
+
     <div>
     
         <asp:GridView ID="GridView1" runat="server" 
@@ -53,9 +47,13 @@
                 <asp:ButtonField ButtonType="Button" Text="Add To Cart" CommandName="AddCart" />
             </Columns>
             
+            <EmptyDataTemplate>
+                Your Album is Empty. Click
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Upload.aspx">here</asp:HyperLink>
+                &nbsp;to upload new images
+            </EmptyDataTemplate>
+            
         </asp:GridView>
     
     </div>
-    </form>
-</body>
-</html>
+ </asp:Content>

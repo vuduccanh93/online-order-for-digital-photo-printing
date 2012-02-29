@@ -11,46 +11,59 @@ public partial class Album : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Response.Cookies["username"].Value = "abc";
-            string path = HttpContext.Current.Request.PhysicalApplicationPath + @"\Images\" + Request.Cookies["username"].Value;
-            // string path = @"D:\Blog\Previous\ImageShow\Images\Temple"; // This statement also valid
-
-            string[] extensions = { "*.jpg", "*.png", "*.bmp" };
-
-            List<string> files = new List<string>();
-            foreach (string filter in extensions)
+            if (Request.Cookies["UserName"] == null)
             {
-                files.AddRange(System.IO.Directory.GetFiles(path, filter));
+                Response.Redirect("Login.aspx");
             }
-
-            IList<ImageFileInfo> imageFileList = new List<ImageFileInfo>();
-            foreach (string strFileName in files)
+            else
             {
-                string url = ResolveUrl(strFileName.Replace(Server.MapPath(""), "~/"));
-                
-                imageFileList.Add(new ImageFileInfo(url));
-            }
+                IList<ImageFileInfo> imageFileList;
+                //Response.Cookies["username"].Value = "abc";
+                string path = HttpContext.Current.Request.PhysicalApplicationPath + @"\Images\" + Request.Cookies["UserName"].Value;
+                // string path = @"D:\Blog\Previous\ImageShow\Images\Temple"; // This statement also valid
 
-            GridView1.DataSource = imageFileList;
-            SqlDataReader dr;
-            SqlConnection con = DBConnection.getConnection();
-            SqlCommand cmd = new SqlCommand("SELECT RES FROM Price", con);
-            
-            GridView1.DataBind();
-            foreach (GridViewRow row in GridView1.Rows)
-            {
+                string[] extensions = { "*.jpg", "*.png", "*.bmp" };
 
-                dr = cmd.ExecuteReader();
-                while (dr.Read())
+                List<string> files = new List<string>();
+                foreach (string filter in extensions)
                 {
-                    string s = dr["RES"].ToString();
-                    
-                    ((DropDownList)row.Cells[2].FindControl("DropDownList1")).Items.Add(s);
+                    if (!System.IO.Directory.Exists(path))
+                    {
+                        System.IO.Directory.CreateDirectory(path);
 
+                    }
+                    files.AddRange(System.IO.Directory.GetFiles(path, filter));
                 }
-                dr.Close();
+
+                imageFileList = new List<ImageFileInfo>();
+                foreach (string strFileName in files)
+                {
+                    string url = ResolveUrl(strFileName.Replace(Server.MapPath(""), "~/"));
+
+                    imageFileList.Add(new ImageFileInfo(url));
+                }
+
+                GridView1.DataSource = imageFileList;
+                SqlDataReader dr;
+                SqlConnection con = DBConnection.getConnection();
+                SqlCommand cmd = new SqlCommand("SELECT RES FROM Price", con);
+
+                GridView1.DataBind();
+                foreach (GridViewRow row in GridView1.Rows)
+                {
+
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        string s = dr["RES"].ToString();
+
+                        ((DropDownList)row.Cells[2].FindControl("DropDownList1")).Items.Add(s);
+
+                    }
+                    dr.Close();
+                }
+                con.Close();
             }
-            con.Close();
         }
     }
 
@@ -91,4 +104,8 @@ public partial class Album : System.Web.UI.Page
         }
     }
 
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Upload.aspx");
+    }
 }

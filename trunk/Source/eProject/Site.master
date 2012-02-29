@@ -1,0 +1,62 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title></title>
+    <link href="~/Styles/default.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="Scripts/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body style="background-color: #000000; background-image: url('imgtemp/img1.gif'); background-repeat: repeat-x; font-family: Arial, Helvetica, sans-serif; color: #999999">
+    <form runat="server">
+    <div class="page">
+         <div id="header" style="background-image: url('imgtemp/img2.jpg'); background-repeat: repeat">
+	        <h1 ><a href="#">Photo Printing</a></h1>
+	        <h2 ><a href="http://www.csstemplatesforfree.com/">What you see, what you take </a></h2>
+         </div>
+         </div>
+<div id="menu">
+	<ul>
+		<li class="active"><a href="#" accesskey="1" title="" style="background-image: url('imgtemp/img4.gif'); background-repeat: no-repeat; background-position: center center">Home</a></li>
+		<li><a href="Upload.aspx" accesskey="2" title="" style="background-image: url('imgtemp/img4.gif'); background-repeat: no-repeat; background-position: center center">
+            Upload</a></li>
+		<li><a href="Album.aspx" accesskey="3" title="" style="background-image: url('imgtemp/img4.gif'); background-repeat: no-repeat; background-position: center center">
+            album</a></li>
+		<li><a href="CustomerPanel.aspx" accesskey="4" title="" style="background-image: url('imgtemp/img4.gif'); background-repeat: no-repeat; background-position: center center">
+            Profile</a></li>
+		<li><a href="Price.aspx" accesskey="5" title="" style="background-image: url('imgtemp/img4.gif'); background-repeat: no-repeat; background-position: center center">
+            Price</a></li>
+	</ul>
+</div>
+<div id="content">
+	<div id="colOne">
+        <asp:Label ID="Label1" runat="server" Text="Welcome"></asp:Label>
+&nbsp;<asp:Label ID="lblGuest" runat="server" Text="Guest"></asp:Label>
+        <asp:LinkButton ID="lbtnUserName" runat="server" onclick="lbtnUserName_Click" 
+            Visible="False">Customer</asp:LinkButton>
+        <br />
+        <asp:LinkButton ID="lbtnVewCart" runat="server" onclick="lbtnVewCart_Click" 
+            Visible="False">View Cart</asp:LinkButton>
+&nbsp;<asp:LinkButton ID="lbtnLogout" runat="server" onclick="lbtnLogout_Click" 
+            Visible="False">Logout</asp:LinkButton>
+        <br />
+        <asp:LinkButton ID="lbtnLogin" runat="server" onclick="LinkButton1_Click">Login</asp:LinkButton>
+&nbsp;<asp:LinkButton ID="lbtnRegister" runat="server" onclick="LinkButton2_Click">Register</asp:LinkButton>
+            <br />
+	</div>
+    
+	<div id="colTwo">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+        </div>
+	
+	<div style="clear: both;">&nbsp;</div>
+</div>
+<div id="footer" style="background-image: url('imgtemp/img5.gif'); background-repeat: repeat-x">
+	<p>1A Yet Kieu  Street - Hanoi</p>
+</div>
+
+    </form>
+</body>
+</html>
