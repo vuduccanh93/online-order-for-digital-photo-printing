@@ -17,7 +17,7 @@ CREATE TABLE Customer (
 	[Password] varchar(30),
 	CustomerName ntext,
 	DoB datetime,
-	Gender int,
+	Gender varchar(10),
 	Email varchar(50),
 	PhoneNumber numeric,
 	[Address] ntext
