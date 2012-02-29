@@ -10,6 +10,14 @@ public partial class admin_OrderDetail : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Request.Cookies["Loggedin"] == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
+        if (!Request.Cookies["Loggedin"].Value.Equals("y"))
+        {
+            Response.Redirect("Login.aspx");
+        }
         if (Request.QueryString["id"] == null)
         {
             Response.Redirect("OrderManagement.aspx");
@@ -74,8 +82,8 @@ public partial class admin_OrderDetail : System.Web.UI.Page
         }
         if (count == 0)
         {
-            string imgdir = Server.MapPath("Images");
-            System.IO.Directory.Delete(imgdir + "\\" + Request.Cookies["username"].Value,true);
+            string imgdir = Server.MapPath("../Images");
+            System.IO.Directory.Delete(imgdir + "\\" + DetailsView2.Rows[1].Cells[1].Text, true);
         }
         Response.Redirect(Request.RawUrl);
         con.Close();
