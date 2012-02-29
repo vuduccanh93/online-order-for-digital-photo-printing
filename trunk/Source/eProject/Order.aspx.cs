@@ -118,6 +118,7 @@ public partial class Order : System.Web.UI.Page
                 cmd1.ExecuteNonQuery();
                 con1.Close();
             }
+            Cart.Instance.RemoveCart();
             MultiView1.ActiveViewIndex = 1;
         }
         
@@ -181,7 +182,9 @@ public partial class Order : System.Web.UI.Page
                 cmd1.Parameters.Add(new SqlParameter("@TPrice", item.TotalPrice));
                 cmd1.ExecuteNonQuery();
                 con1.Close();
+                
             }
+            Cart.Instance.RemoveCart();
             MultiView1.ActiveViewIndex = 0;
         }
         else
