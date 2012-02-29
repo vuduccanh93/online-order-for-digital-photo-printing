@@ -54,6 +54,8 @@ CREATE TABLE OrderDetails (
 )
 
 
+INSERT INTO Administrator VALUES ('admin', 'admin')
+GO
 INSERT INTO Customer VALUES ('longnh', '123456', 'Nguyen Hoang Long', '04/07/1988', 'Male', 'longnh@aptech.com.vn', 0979371098, 'Hoan Kiem - Ha Noi')
 GO
 INSERT INTO Customer VALUES ('hunglv', '123456', 'Le Viet Hung', '10/20/1989', 'Male', 'hunglv@aptech.com.vn', 123456789, 'Hoan Kiem - Ha Noi')
