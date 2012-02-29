@@ -81,7 +81,9 @@ public class Cart
             subTotal += item.TotalPrice;
 
         return subTotal;
-    } 
+    }
 
-    
+    public void RemoveCart() {
+        items.Clear();
+    }
 }
