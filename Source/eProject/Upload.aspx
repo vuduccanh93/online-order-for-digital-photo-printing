@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master"  CodeFile="Upload.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Title="Upload Image" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master"  CodeFile="Upload.aspx.cs" Inherits="_Default" %>
 
 <asp:Content  ID="BodyContent"  runat="server"  ContentPlaceHolderID="MainContent">
     <script src="Scripts/jquery-1.4.1.js" type="text/javascript"></script>

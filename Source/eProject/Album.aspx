@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeFile="Album.aspx.cs" Inherits="Album" %>
+﻿<%@ Page Title="Album" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeFile="Album.aspx.cs" Inherits="Album" %>
 
 <asp:Content  ID="BodyContent"  runat="server"  ContentPlaceHolderID="MainContent">
     <script type="text/javascript" src="Scripts/jquery-1.4.1.min.js"></script>    	

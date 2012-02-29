@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeFile="CustomerPanel.aspx.cs" Inherits="CustomerPanel" %>
+﻿<%@ Page Title="Profile" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeFile="CustomerPanel.aspx.cs" Inherits="CustomerPanel" %>
 
 <asp:Content  ID="BodyContent"  runat="server"  ContentPlaceHolderID="MainContent">
     <style type="text/css">

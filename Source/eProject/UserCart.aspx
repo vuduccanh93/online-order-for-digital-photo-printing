@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeFile="UserCart.aspx.cs" Inherits="UserCart" %>
+﻿<%@ Page Title="Cart" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeFile="UserCart.aspx.cs" Inherits="UserCart" %>
 
 <%@ Register src="CartControl.ascx" tagname="CartControl" tagprefix="uc1" %>
 
