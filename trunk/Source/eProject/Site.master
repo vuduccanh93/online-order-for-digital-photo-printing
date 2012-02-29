@@ -19,7 +19,7 @@
          </div>
 <div id="menu">
 	<ul>
-		<li class="active"><a href="#" accesskey="1" title="" style="background-image: url('imgtemp/img4.gif'); background-repeat: no-repeat; background-position: center center">Home</a></li>
+		<li class="active"><a href="Default.aspx" accesskey="1" title="" style="background-image: url('imgtemp/img4.gif'); background-repeat: no-repeat; background-position: center center">Home</a></li>
 		<li><a href="Upload.aspx" accesskey="2" title="" style="background-image: url('imgtemp/img4.gif'); background-repeat: no-repeat; background-position: center center">
             Upload</a></li>
 		<li><a href="Album.aspx" accesskey="3" title="" style="background-image: url('imgtemp/img4.gif'); background-repeat: no-repeat; background-position: center center">
