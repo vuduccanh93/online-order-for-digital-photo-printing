@@ -47,6 +47,7 @@ GO
 CREATE TABLE OrderDetails (
 	OrderDetailsID int PRIMARY KEY IDENTITY(1,1),
 	OrderID int FOREIGN KEY REFERENCES Orders(OrderID),
+	ImgUrl text,
 	RES varchar(15) FOREIGN KEY REFERENCES Price(RES),
 	Quantity int,
 	TPrice numeric
