@@ -123,16 +123,21 @@
                             <asp:Label ID="Label4" runat="server" Text="Card Number"></asp:Label>
                         </td>
                         <td align="left" class="style2" width="50%">
-                            <asp:TextBox ID="txtCardNumber" runat="server" Width="200px"></asp:TextBox>
+                            <asp:TextBox ID="txtCardNumber" runat="server" Width="200px" 
+                                ValidationGroup="CardValidate"></asp:TextBox>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <asp:Label ID="Label9" runat="server" ForeColor="Red" 
                                 Text="Your Credit Card Number is invalid" Visible="False"></asp:Label>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                                ControlToValidate="txtCardNumber" Display="Dynamic" 
+                                ErrorMessage="Card number must not empty!" ForeColor="Red" 
+                                ValidationGroup="CardValidate"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                     <tr>
                         <td align="right" width="50%">
                             <asp:Button ID="btnAccept" runat="server" onclick="btnAccept_Click" 
-                                Text="Accept" />
+                                Text="Accept" ValidationGroup="CardValidate" />
                         </td>
                         <td align="left" width="50%">
                             <asp:Button ID="Button3" runat="server" onclick="Button3_Click" 

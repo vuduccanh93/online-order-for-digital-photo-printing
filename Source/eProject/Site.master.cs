@@ -15,18 +15,20 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             lbtnUserName.Visible = true;
             lbtnLogout.Visible = true;
             lbtnVewCart.Visible = true;
+            lbtnUserName.Enabled = true;
             lbtnLogin.Visible = false;
             lbtnRegister.Visible = false;
-            lblGuest.Visible = false;
+            //lblGuest.Visible = false;
             
         }
         else {
-            lbtnUserName.Visible = false;
             lbtnLogout.Visible = false;
             lbtnVewCart.Visible = false;
+            lbtnUserName.Enabled = false;
+            lbtnUserName.Text = "Guest";
             lbtnLogin.Visible = true;
             lbtnRegister.Visible = true;
-            lblGuest.Visible = true;
+            //lblGuest.Visible = true;
         }
     }
     protected void LinkButton1_Click(object sender, EventArgs e)
