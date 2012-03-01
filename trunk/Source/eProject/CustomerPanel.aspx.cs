@@ -129,7 +129,8 @@ public partial class CustomerPanel : System.Web.UI.Page
             cmd.Parameters.Add(new SqlParameter("@PhoneNumber", txtPhoneNumber.Text));
             cmd.ExecuteNonQuery();
             con.Close();
-            lblMess2.Visible = false;
+            lblMess2.Text = "Profile is changed!";
+            lblMess2.Visible = true;
         } catch(Exception ex) {
             lblMess2.Text = "Connection Error!";
             lblMess2.Visible = true;

@@ -33,9 +33,8 @@
 <div id="content">
 	<div id="colOne">
         <asp:Label ID="Label1" runat="server" Text="Welcome"></asp:Label>
-&nbsp;<asp:Label ID="lblGuest" runat="server" Text="Guest"></asp:Label>
-        <asp:LinkButton ID="lbtnUserName" runat="server" onclick="lbtnUserName_Click" 
-            Visible="False">Customer</asp:LinkButton>
+&nbsp;<asp:LinkButton ID="lbtnUserName" runat="server" onclick="lbtnUserName_Click" 
+            Enabled="False">Guest</asp:LinkButton>
         <br />
         <asp:LinkButton ID="lbtnVewCart" runat="server" onclick="lbtnVewCart_Click" 
             Visible="False">View Cart</asp:LinkButton>
@@ -44,6 +43,25 @@
         <br />
         <asp:LinkButton ID="lbtnLogin" runat="server" onclick="LinkButton1_Click">Login</asp:LinkButton>
 &nbsp;<asp:LinkButton ID="lbtnRegister" runat="server" onclick="LinkButton2_Click">Register</asp:LinkButton>
+            <br />
+            <br />
+        <asp:Panel ID="Panel1" runat="server" HorizontalAlign="Center">
+            <asp:Label ID="Label2" runat="server" ForeColor="White" Text="Our Price"></asp:Label>
+            <br />
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+                DataKeyNames="RES" DataSourceID="SqlDataSource1">
+                <Columns>
+                    <asp:BoundField DataField="RES" HeaderText="Resolution" ReadOnly="True" 
+                        SortExpression="RES" />
+                    <asp:BoundField DataField="Money" DataFormatString="{0} $" 
+                        HeaderText="Unit Price" SortExpression="Money" />
+                </Columns>
+            </asp:GridView>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:myCon %>" 
+                ProviderName="System.Data.SqlClient" SelectCommand="SELECT * FROM [Price]">
+            </asp:SqlDataSource>
+        </asp:Panel>
             <br />
 	</div>
     
